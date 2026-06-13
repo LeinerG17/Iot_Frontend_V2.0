@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth }              from './context/AuthContext'
 import { StudentAuthProvider, useStudentAuth } from './context/StudentAuthContext'
+import { ThemeProvider } from './context/ThemeContext'
 import Sidebar from './components/layout/Sidebar'
 
 import LoginPage        from './pages/login/LoginPage'
@@ -77,9 +78,11 @@ export default function App() {
   return (
     <AuthProvider>
       <StudentAuthProvider>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
+        <ThemeProvider>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </ThemeProvider>
       </StudentAuthProvider>
     </AuthProvider>
   )

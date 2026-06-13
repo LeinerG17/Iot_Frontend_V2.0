@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { useTheme } from '../../context/ThemeContext'
 
 const icons = {
   dashboard: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>,
@@ -30,6 +31,7 @@ const nav = [
 
 export default function Sidebar() {
   const { usuario, logout } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
 
   const handleLogout = () => { logout(); navigate('/login') }
@@ -56,6 +58,12 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+          <span style={{ fontSize: 11, color: 'var(--text3)' }}>Apariencia</span>
+          <button className="theme-toggle" onClick={toggleTheme} title="Cambiar tema">
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+        </div>
         <div className="user-card">
           <div className="user-avatar">
             {(usuario?.username?.[0] ?? 'U').toUpperCase()}

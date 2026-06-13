@@ -83,6 +83,16 @@ export const getUbicacionTiempoReal = () => api.get('/ubicacion/tiempo-real/')
 export const getReadings = (deviceId) =>
   api.get(`/readings/list/${deviceId ? `?device=${deviceId}` : ''}`)
 
+// RUTA COORDENADAS (para OSRM)
+export const getRutaCoordenadas = (id) => api.get(`/rutas/${id}/coordenadas/`)
+
+// PARADA CERCANA (público)
+export const getParadaCercana = (lat, lng) =>
+  api.get(`/parada-cercana/?lat=${lat}&lng=${lng}`)
+
+// DISPOSITIVOS ACTIVOS
+export const getDispositivosActivos = () => api.get('/dispositivos-activos/')
+
 // COMANDOS
 export const enviarComando = (data) => api.post('/commands/', data)
 export const getComandos   = ()     => api.get('/commands/list/')
@@ -109,5 +119,8 @@ export const getDashboardStats = async () => {
     ubicacion:   ubicacion.data,
   }
 }
+
+// READING PÚBLICO (Arduino A7670SA)
+export const postReadingPublic = (data) => api.post('/readings/public/', data)
 
 export default api
